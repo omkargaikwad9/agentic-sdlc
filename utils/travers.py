@@ -704,26 +704,10 @@ def _git_diff(repository_root: str) -> dict:
 
 if __name__ == "__main__":
 
+    import sys
 
-    _write_file(
-            repository_root=".",
-            file_path="test_agent_file.py",
-            content="""
-        print("Modified by coding agent")
-        """
-        )
-
-    result = _git_diff(".")
-
-    print("\n========== GIT DIFF ==========\n")
-
-    print("Has changes:")
-    print(result["has_changes"])
-
-    print("\nDiff:\n")
-    print(result["diff"])
-
-    print("\n==============================\n")
+    repository_path = sys.argv[1]
+    _git_diff(repository_path)
 
 
 
