@@ -7,6 +7,16 @@ pipeline {
     }
 
     stages {
+        stage('Checkout Target Repository') {
+            steps {
+
+                dir('target') {
+
+                    git 'https://github.com/omkargaikwad9/target_repo.git'
+
+                }
+            }
+        }
 
         stage('Show Issue Information') {
             steps {
@@ -39,6 +49,16 @@ pipeline {
             steps {
                 bat 'git checkout -B agent/issue-%ISSUE_NUMBER%'
                 bat 'git branch'
+            }
+        }
+
+        stage('Git Diff Check') {
+            steps {
+
+                bat '''
+                    python -m travers._git_diff target
+                '''
+
             }
         }
 

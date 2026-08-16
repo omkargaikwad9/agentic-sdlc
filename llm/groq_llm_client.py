@@ -2,6 +2,8 @@ from groq import Groq
 from dotenv import load_dotenv
 load_dotenv()
 
+from langchain_groq import ChatGroq
+
 import os
 
 
@@ -41,6 +43,21 @@ class GroqLLMClient:
 
         return response.choices[0].message.content
 
+
+def get_llm():
+
+    api_key = os.getenv("GROQ_API_KEY")
+
+    if not api_key:
+        raise ValueError(
+            "GROQ_API_KEY is not configured"
+        )
+
+    return ChatGroq(
+        model="llama-3.3-70b-versatile",
+        temperature=0,
+        api_key=api_key,
+    )
 
 
 if __name__ == "__main__":

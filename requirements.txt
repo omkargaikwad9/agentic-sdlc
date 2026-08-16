@@ -2,6 +2,7 @@ langgraph
 langchain
 langchain-community
 langchain-core
+langchain-groq
 
 logging
 
@@ -20,3 +21,5 @@ python-dotenv
 fastapi
 
 uvicorn
+
+dotenv

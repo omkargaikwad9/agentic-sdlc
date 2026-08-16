@@ -1,17 +1,14 @@
-from typing import TypedDict,List,Optional
+from typing import TypedDict,List,Optional,Annotated
+from langgraph.graph.message import add_messages
+from langchain_core.messages import BaseMessage
+
 
 
 class AgentState(TypedDict):
-    user_request:dict
-
-    metadata:list
-
-    impacted_analysis:dict
-
-    file_content:dict
-
-    generated_code:dict
-
-    validation_result:dict
-
-    messages:list
+    messages: Annotated[List[BaseMessage], 
+                        add_messages,
+                        ]
+    repository_path: str
+    issue_number: int
+    issue_title: str
+    issue_body: str
