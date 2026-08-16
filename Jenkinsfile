@@ -27,7 +27,7 @@ pipeline {
             }
         }
 
-        stage('Checkout Target Repository') {
+        stage('Check Target Repository') {
             steps {
                 deleteDir()
 
