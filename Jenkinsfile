@@ -7,16 +7,6 @@ pipeline {
     }
 
     stages {
-        stage('Checkout Target Repository') {
-            steps {
-
-                dir('target') {
-
-                    git 'https://github.com/omkargaikwad9/target_repo.git'
-
-                }
-            }
-        }
 
         stage('Show Issue Information') {
             steps {
@@ -27,38 +17,40 @@ pipeline {
             }
         }
 
-        stage('Check url Target Repository') {
+        stage('Checkout Target Repository') {
             steps {
-                deleteDir()
-
-                git branch: 'main',
-                    url: "${params.REPOSITORY_URL}"
-                    credentialsId: 'omkargaikwad9'
+                dir('target') {
+                    git branch: 'main',
+                        url: "${params.REPOSITORY_URL}",
+                        credentialsId: 'omkargaikwad9'
+                }
             }
         }
 
         stage('Check Target Repository') {
             steps {
-                bat 'git status'
-                bat 'git branch'
-                bat 'dir'
+                dir('target') {
+                    bat 'git status'
+                    bat 'git branch'
+                    bat 'dir'
+                }
             }
         }
 
         stage('Create Agent Branch') {
             steps {
-                bat 'git checkout -B agent/issue-%ISSUE_NUMBER%'
-                bat 'git branch'
+                dir('target') {
+                    bat 'git checkout -B agent/issue-%ISSUE_NUMBER%'
+                    bat 'git branch'
+                }
             }
         }
 
         stage('Git Diff Check') {
             steps {
-
                 bat '''
                     python -m travers._git_diff target
                 '''
-
             }
         }
 
