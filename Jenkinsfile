@@ -49,7 +49,7 @@ pipeline {
         stage('Git Diff Check') {
             steps {
                 bat '''
-                    python -m travers._git_diff target
+                    python -m utils.travers._git_diff target
                 '''
             }
         }
