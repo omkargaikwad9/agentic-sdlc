@@ -707,7 +707,8 @@ if __name__ == "__main__":
     import sys
 
     repository_path = sys.argv[1]
-    _git_diff(repository_path)
+    resutl = _git_diff(repository_path)
+    print(resutl)
 
 
 
